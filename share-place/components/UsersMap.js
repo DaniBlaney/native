@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import MapView from 'react-native-maps';
+import { black } from 'ansi-colors';
 
 const usersMap = props => {
   let userLocationMarker = null;
@@ -33,7 +34,9 @@ const styles = StyleSheet.create({
   mapContainer:{
     width: '100%',
     height: 350,
-    marginTop: 20
+    marginTop: 20,
+    borderWidth: 2,
+    borderColor:'black'
   },
   map: {
     width: '100%',

@@ -55,7 +55,7 @@ render() {
   return (
     <View style={styles.container}>
       <View style={{marginBottom: 20}}>
-      <Button title="Get User Places" onPress=
+      <Button title="Show Users Places" onPress=
       {this.getUserPlacesHandler} />
       </View>
       <FetchLocation onGetLocation={this.getUserLocationHandler} />
