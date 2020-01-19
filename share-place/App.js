@@ -4,6 +4,10 @@ import UsersMap from './components/UsersMap';
 import FetchLocation from './components/FetchLocation';
 
 export default class App extends React.Component {
+  state = {
+    userLocation: null
+  }
+  
   getUserLocationHandler = () => {
     navigator.geolocation.getCurrentPosition(position => {
       console.log(position);
