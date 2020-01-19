@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Button } from 'react-native';
 import UsersMap from './components/UsersMap';
 import FetchLocation from './components/FetchLocation';
 
@@ -27,11 +27,21 @@ export default class App extends React.Component {
       })
       .then(res => console.log(res))
       .catch(err => console.log(err));
-    }, err => console.log(err));
+    },
+    err => console.log(err));
   }
-render(){
+
+  getUserPlacesHandler = () => {
+    
+};
+
+render() {
   return (
     <View style={styles.container}>
+      <View style={{marginBottom: 20}}>
+      <Button title="Get User Places" onPress=
+      {this.getUserPlacesHandler} />
+      </View>
       <FetchLocation onGetLocation={this.getUserLocationHandler} />
       <UsersMap userLocation={this.state.userLocation}/>
     </View>
