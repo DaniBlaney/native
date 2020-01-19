@@ -18,7 +18,15 @@ export default class App extends React.Component {
           longitudeDelta: 0.0421,
         }
       });
-
+      fetch('https://share-place-2471a.firebaseio.com/places.json', {
+        method: 'POST',
+        body: JSON.stringify({
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude,
+        })
+      })
+      .then(res => console.log(res))
+      .catch(err => console.log(err));
     }, err => console.log(err));
   }
 render(){
