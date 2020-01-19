@@ -5,7 +5,8 @@ import FetchLocation from './components/FetchLocation';
 
 export default class App extends React.Component {
   state = {
-    userLocation: null
+    userLocation: null,
+    usersPlaces: []
   }
 
   getUserLocationHandler = () => {
@@ -14,8 +15,8 @@ export default class App extends React.Component {
         userLocation: {
           latitude: position.coords.latitude,
           longitude: position.coords.longitude,
-          latitudeDelta: 0.0922,
-          longitudeDelta: 0.0421,
+          latitudeDelta: 2.9922,
+          longitudeDelta: 2.9421,
         }
       });
       fetch('https://share-place-2471a.firebaseio.com/places.json', {
@@ -32,7 +33,22 @@ export default class App extends React.Component {
   }
 
   getUserPlacesHandler = () => {
-    
+    fetch('https://share-place-2471a.firebaseio.com/places.json')
+      .then(res => res.json())
+      .then(parsedRes => {
+        const placesArray =[];
+        for (const key in parsedRes) {
+          placesArray.push({
+            latitude: parsedRes[key].latitude,
+            longitude: parsedRes[key].longitude,
+            id: key
+          });
+        }
+        this.setState({
+          usersPlaces: placesArray
+        });
+      })
+      .catch(err => console.log(err));
 };
 
 render() {
@@ -43,7 +59,9 @@ render() {
       {this.getUserPlacesHandler} />
       </View>
       <FetchLocation onGetLocation={this.getUserLocationHandler} />
-      <UsersMap userLocation={this.state.userLocation}/>
+      <UsersMap
+      userLocation={this.state.userLocation}
+      usersPlaces={this.state.usersPlaces}/>
     </View>
   );
   }

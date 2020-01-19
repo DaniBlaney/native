@@ -8,18 +8,22 @@ const usersMap = props => {
   if (props.userLocation){
     userLocationMarker = <MapView.Marker coordinate={props.userLocation}/>;
   }
+  const usersMarkers = props.usersPlaces.map(userPlace => (
+  <MapView.Marker coordinate={userPlace} key={userPlace.id} />
+  ));
   return(
     <View style={styles.mapContainer}>
       <MapView
        initialRegion={{
-        latitude: 37.78825,
-        longitude: -122.4324,
-        latitudeDelta: 0.0922,
-        longitudeDelta: 0.0421,
+        latitude: 40.0583,
+        longitude: -74.4057,
+        latitudeDelta: 2.9922,
+        longitudeDelta: 2.9421,
         }}
         region={props.userLocation}
         style={styles.map}>
           {userLocationMarker}
+          {usersMarkers}
           </MapView>
     </View>
   );
@@ -28,7 +32,7 @@ const usersMap = props => {
 const styles = StyleSheet.create({
   mapContainer:{
     width: '100%',
-    height: 200,
+    height: 350,
     marginTop: 20
   },
   map: {
