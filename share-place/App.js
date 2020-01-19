@@ -7,10 +7,17 @@ export default class App extends React.Component {
   state = {
     userLocation: null
   }
-  
+
   getUserLocationHandler = () => {
     navigator.geolocation.getCurrentPosition(position => {
-      console.log(position);
+      this.setState({
+        userLocation: {
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude,
+          latitudeDelta: 0.0922,
+          longitudeDelta: 0.0421,
+        }
+      });
 
     }, err => console.log(err));
   }
@@ -18,7 +25,7 @@ render(){
   return (
     <View style={styles.container}>
       <FetchLocation onGetLocation={this.getUserLocationHandler} />
-      <UsersMap />
+      <UsersMap userLocation={this.state.userLocation}/>
     </View>
   );
   }
